@@ -8,15 +8,9 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.post(
-  '/',
-  authToken,
-  validExRoom,
-  hasRoomRecorded,
-  mitorRoom.createHandle,
-);
+router.post('/', validExRoom, hasRoomRecorded, mitorRoom.createHandle);
 
-router.get('/', authToken, mitorRoom.readMany);
+router.get('/', mitorRoom.readMany);
 
 router.get('/:RID', mitorRoom.readById);
 
@@ -29,8 +23,8 @@ router.put(
   mitorRoom.editById,
 );
 
-router.delete('/:RID', authToken, mitorRoom.deleteById);
+router.delete('/:RID', mitorRoom.deleteById);
 
-router.delete('/', authToken, mitorRoom.deleteAll);
+router.delete('/', mitorRoom.deleteAll);
 
 export const MitorRoomRouter = router;

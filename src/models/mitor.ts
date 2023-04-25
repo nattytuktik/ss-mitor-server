@@ -6,6 +6,7 @@ export const Mitor = model(
     {
       MITOR: [
         {
+          _id: false,
           NUM: {
             type: Number,
             required: true,

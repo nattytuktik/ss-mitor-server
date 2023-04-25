@@ -92,6 +92,12 @@ const readMany = async (req: Request, res: Response) => {
       .sort('ROOM -test')
       .populate('MITOR');
 
+    const test = sect1.map(async (room) => {
+      console.log(room.MITOR._id);
+      const r = await Mitor.findOne({ _id: room.MITOR._id });
+      return r;
+    });
+
     const result = {
       sect1,
       sect2,

@@ -3,7 +3,8 @@ import Jwt from 'jsonwebtoken';
 import bcypt from 'bcrypt';
 import { AdminConfig } from '../models/config';
 
-const token_key = 'TO$DVDAO49#';
+const TOKEN_KEY = process.env.TOKEN_KEY || '';
+
 const registor = async (req: Request, res: Response) => {
   try {
     const admin = new AdminConfig();
@@ -24,13 +25,12 @@ const registor = async (req: Request, res: Response) => {
 
       const token = Jwt.sign(
         { AID: admin._id, username: admin.USERNAME },
-        token_key,
-        { expiresIn: '2m' },
+        TOKEN_KEY,
+        { expiresIn: '10m' },
       );
       admin.token = token;
 
       const result = await admin.save();
-
       res.status(200).send(result);
     }
   } catch (error) {
@@ -55,8 +55,8 @@ const login = async (req: Request, res: Response) => {
       if (admin && comparePassword) {
         token = Jwt.sign(
           { AID: admin._id, username: admin.USERNAME },
-          token_key,
-          { expiresIn: '2m' },
+          TOKEN_KEY,
+          { expiresIn: '10m' },
         );
         res
           .status(200)

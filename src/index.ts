@@ -5,6 +5,7 @@ import { MitorRouter } from './routers/mitor';
 import { MitorRoomRouter } from './routers/mitorRoom';
 
 import express, { urlencoded } from 'express';
+import cors from 'cors';
 import { SuwanRouter } from './routers/suwan';
 import { AuthRouter } from './routers/auth';
 
@@ -34,5 +35,5 @@ const Routers: Array<RouterMain> = [
   },
 ];
 
-const middlewares = [express.json(), urlencoded({ extended: false })];
+const middlewares = [express.json(), urlencoded({ extended: false }), cors()];
 main(Routers, middlewares);
